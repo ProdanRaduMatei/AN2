@@ -1,0 +1,9 @@
+<NotepadPlus>
+    <Session activeView="0">
+        <mainView activeIndex="1">
+            <File firstVisibleLine="6" xOffset="0" scrollWidth="2808" startPos="947" endPos="947" selMode="0" lang="Assembly" encoding="-1" filename="D:\asm_tools\npp\Lab2E1.asm" backupFilePath="" originalFileLastModifTimestamp="1698671906" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="3670064" mapWrapIndentMode="-1" mapIsWrap="no" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="2808" startPos="870" endPos="870" selMode="0" lang="Assembly" encoding="-1" filename="D:\asm_tools\npp\Lab2E2.asm" backupFilePath="" originalFileLastModifTimestamp="1698673220" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="1152647168" mapWrapIndentMode="-1" mapIsWrap="no" />
+        </mainView>
+        <subView activeIndex="0" />
+    </Session>
+</NotepadPlus>
