@@ -24,34 +24,33 @@ segment code use32 class=code
     start:
         ; ...
         ; 1 / a, words
-        mov ax, [a]
-        mov bx, 1
-        div bx ; ax = ax / bx
-        mov [a], ax
+        mov ax, 1 ; ax = 1
+        idiv word [a] ; ax = ax / a
+        mov bx, ax ; bx = ax
         ; 200 * b, words
-        mov ax, [b]
-        mov bx, 200
-        mul bx ; ax = ax * bx
-        mov [b], ax
+        mov ax, [b] ; ax = b
+        mov dx, 200 ; dx = 200
+        mul dx ; dx:ax = ax * dx
+        ; make dx:ax in eax
+        push dx ; push dx onto the stack
+        push ax ; push ax onto the stack
+        pop eax ; pop ax off the stack
         ; c / (d + 1), bytes
-        mov al, [c]
-        mov bl, [d]
+        mov al, [c] ; al = c
+        mov bl, [d] ; bl = d
         inc bl ; bl = bl + 1
         div bl ; al = al / bl
-        mov [c], al
-        ; 1 + 200 * 1 - 2 / (1 + 1) + 1, words
-        mov ax, [a]
-        movzx eax, ax
-        mov bx, [b]
-        movzx ebx, bx
-        add eax, ebx ; eax = eax + ebx
-        mov al, [c]
-        movzx ebx, al
-        
+        ; move al in ebx
+        movzx ebx, al ; ebx = al
+        ; move ax in ecx
+        movzx ecx, ax ; ecx = ax
+        ; ebx + eax - ecx + e, doublewords
+        mov edx, [e] ; edx = e
+        add ebx, eax ; ebx = ebx + eax
+        sub ebx, ecx ; ebx = ebx - ecx
+        add ebx, edx ; ebx = ebx + edx
+        ; ebx is the result
 
-        sub ax, bx ; ax = ax - bx
-        mov bx, [e]
-        add ax, bx ; ax = ax + bx
 
     
         ; exit(0)

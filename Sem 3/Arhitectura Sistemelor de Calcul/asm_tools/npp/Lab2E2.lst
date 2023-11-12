@@ -1,0 +1,58 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ; declare external functions needed by our program
+     7                                  extern exit               ; tell nasm that exit exists even if we won't be defining it
+     8                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+     9                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    10                                  
+    11                                  ; our data is declared here (the variables needed by our program)
+    12                                  segment data use32 class=data
+    13                                      ; ...
+    14                                      ; E = 1 / a + 200 * b - c / (d + 1) + e; a,b-word; c,d-byte; e-doubleword;
+    15                                      ; E = 1 / 1 + 200 * 1 - 2 / (1 + 1) + 1 = 201
+    16 00000000 0100                        a dw 1
+    17 00000002 0100                        b dw 1
+    18 00000004 02                          c db 2
+    19 00000005 01                          d db 1
+    20 00000006 01000000                    e dd 1
+    21                                  
+    22                                  ; our code starts here
+    23                                  segment code use32 class=code
+    24                                      start:
+    25                                          ; ...
+    26                                          ; 1 / a, words
+    27 00000000 66B80100                        mov ax, 1 ; ax = 1
+    28 00000004 66F73D[00000000]                idiv word [a] ; ax = ax / a
+    29 0000000B 6689C3                          mov bx, ax ; bx = ax
+    30                                          ; 200 * b, words
+    31 0000000E 66A1[02000000]                  mov ax, [b] ; ax = b
+    32 00000014 66BAC800                        mov dx, 200 ; dx = 200
+    33 00000018 66F7E2                          mul dx ; dx:ax = ax * dx
+    34                                          ; make dx:ax in eax
+    35 0000001B 6652                            push dx ; push dx onto the stack
+    36 0000001D 6650                            push ax ; push ax onto the stack
+    37 0000001F 58                              pop eax ; pop ax off the stack
+    38                                          ; c / (d + 1), bytes
+    39 00000020 A0[04000000]                    mov al, [c] ; al = c
+    40 00000025 8A1D[05000000]                  mov bl, [d] ; bl = d
+    41 0000002B FEC3                            inc bl ; bl = bl + 1
+    42 0000002D F6F3                            div bl ; al = al / bl
+    43                                          ; move al in ebx
+    44 0000002F 0FB6D8                          movzx ebx, al ; ebx = al
+    45                                          ; move ax in ecx
+    46 00000032 0FB7C8                          movzx ecx, ax ; ecx = ax
+    47                                          ; ebx + eax - ecx + e, doublewords
+    48 00000035 8B15[06000000]                  mov edx, [e] ; edx = e
+    49 0000003B 01C3                            add ebx, eax ; ebx = ebx + eax
+    50 0000003D 29CB                            sub ebx, ecx ; ebx = ebx - ecx
+    51 0000003F 01D3                            add ebx, edx ; ebx = ebx + edx
+    52                                          ; ebx is the result
+    53                                  
+    54                                  
+    55                                      
+    56                                          ; exit(0)
+    57 00000041 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    58 00000043 FF15[00000000]                  call    [exit]       ; call exit to terminate the program
