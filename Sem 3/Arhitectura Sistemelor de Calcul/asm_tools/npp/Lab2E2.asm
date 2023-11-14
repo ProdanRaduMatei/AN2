@@ -25,25 +25,33 @@ segment code use32 class=code
         ; ...
         ; 1 / a, words
         mov ax, 1 ; ax = 1
-        idiv word [a] ; ax = ax / a
-        mov bx, ax ; bx = ax
+        mov bx, [a] ; bx = a
+        ; ax in dx:ax
+        cwd ; dx:ax = ax
+        div bx ; ax = dx:ax / bx
+        
+        ; make ax in ebx
+        movzx ebx, ax ; ebx = ax
+
         ; 200 * b, words
         mov ax, [b] ; ax = b
-        mov dx, 200 ; dx = 200
-        mul dx ; dx:ax = ax * dx
+        mov bx, 200 ; bx = 200
+        mul bx ; dx:ax = ax * bx
+
         ; make dx:ax in eax
         push dx ; push dx onto the stack
         push ax ; push ax onto the stack
         pop eax ; pop ax off the stack
+
         ; c / (d + 1), bytes
-        mov al, [c] ; al = c
+        mov ax, [c] ; ax = c
         mov bl, [d] ; bl = d
         inc bl ; bl = bl + 1
-        div bl ; al = al / bl
-        ; move al in ebx
-        movzx ebx, al ; ebx = al
-        ; move ax in ecx
-        movzx ecx, ax ; ecx = ax
+        div bl ; al = ax / bl
+
+        ; move al in ecx
+        movzx ecx, al ; ecx = al
+
         ; ebx + eax - ecx + e, doublewords
         mov edx, [e] ; edx = e
         add ebx, eax ; ebx = ebx + eax
