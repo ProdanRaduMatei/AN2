@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// This function calculates (a * b) % c taking into account that a*b might overflow
+// This function calculates (a * b) % c taking into account that a * b might overflow
 long long mulmod(long long a,long long b,long long c) { 
     long long x = 0, y = a % c;
     while (b > 0) {
@@ -18,7 +18,7 @@ long long mulmod(long long a,long long b,long long c) {
 
 // This function calculates (a ^ b) % c
 long long modulo(long long a, long long b, long long c) {
-    long long x = 1, y = a; // long long is taken to avoid overflow of intermediate results
+    long long x = 1, y = a;
     while (b > 0){
         if (b % 2 == 1)
             x = mulmod(x, y, c);
