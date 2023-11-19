@@ -34,19 +34,20 @@ segment code use32 class=code
         add bx, ax ; bx = bx + ax
 
 
-        ; a + b * c - 9
-        ;mov cx, 9 ; cx = 9
-        ;sub bx, cx ; bx = bx - cx
+        ; a + b * c - 9 = bx - 9
+        mov cx, 9 ; cx = 9
+        sub bx, cx ; bx = bx - cx
 
         ; 20 / (a + b * c - 9)
-        ;mov ax, 20 ; ax = 20
-        ;cwd ; dx:ax = ax
-        ;idiv bx ; ax = dx:ax / bx
+        mov ax, 20 ; ax = 20
+        cwd ; dx:ax = ax
+        idiv bx ; ax = dx:ax / bx
 
-        ; 20 / (a + b * c - 9)
-        ;movsx eax, ax ; eax = ax
-        ;mov ebx, [d] ; ebx = d
-        ;sub eax, ebx ; eax = eax - ebx
+        ; 20 / (a + b * c - 9) - d
+        movsx eax, ax ; eax = ax
+        mov ebx, [d] ; ebx = d
+        sub eax, ebx ; eax = eax - ebx
+        ; eax = 1
 
     
         ; exit(0)

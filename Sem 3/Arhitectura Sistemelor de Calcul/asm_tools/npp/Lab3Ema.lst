@@ -34,21 +34,21 @@
     34 00000017 6601C3                          add bx, ax ; bx = bx + ax
     35                                  
     36                                  
-    37                                          ; a + b * c - 9
-    38                                          ;mov cx, 9 ; cx = 9
-    39                                          ;sub bx, cx ; bx = bx - cx
+    37                                          ; a + b * c - 9 = bx - 9
+    38 0000001A 66B90900                        mov cx, 9 ; cx = 9
+    39 0000001E 6629CB                          sub bx, cx ; bx = bx - cx
     40                                  
     41                                          ; 20 / (a + b * c - 9)
-    42                                          ;mov ax, 20 ; ax = 20
-    43                                          ;cwd ; dx:ax = ax
-    44                                          ;idiv bx ; ax = dx:ax / bx
+    42 00000021 66B81400                        mov ax, 20 ; ax = 20
+    43 00000025 6699                            cwd ; dx:ax = ax
+    44 00000027 66F7FB                          idiv bx ; ax = dx:ax / bx
     45                                  
-    46                                          ; 20 / (a + b * c - 9)
-    47                                          ;movsx eax, ax ; eax = ax
-    48                                          ;mov ebx, [d] ; ebx = d
-    49                                          ;sub eax, ebx ; eax = eax - ebx
+    46                                          ; 20 / (a + b * c - 9) - d
+    47 0000002A 0FBFC0                          movsx eax, ax ; eax = ax
+    48 0000002D 8B1D[03000000]                  mov ebx, [d] ; ebx = d
+    49 00000033 29D8                            sub eax, ebx ; eax = eax - ebx
     50                                  
     51                                      
     52                                          ; exit(0)
-    53 0000001A 6A00                            push    dword 0      ; push the parameter for exit onto the stack
-    54 0000001C FF15[00000000]                  call    [exit]       ; call exit to terminate the program
+    53 00000035 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    54 00000037 FF15[00000000]                  call    [exit]       ; call exit to terminate the program
