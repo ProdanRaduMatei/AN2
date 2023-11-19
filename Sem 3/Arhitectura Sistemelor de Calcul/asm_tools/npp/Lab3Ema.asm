@@ -28,23 +28,25 @@ segment code use32 class=code
         mov bl, [c] ; bl = c
         imul bl ; ax = al * bl
 
-        ; a + b * c
-        mov bx, [a] ; bx = a
+        ; a + b * c = a + ax
+        mov bl, [a] ; bl = a
+        movsx bx, bl ; bx = bl
         add bx, ax ; bx = bx + ax
 
+
         ; a + b * c - 9
-        mov cx, 9 ; cx = 9
-        sub bx, cx ; bx = bx - cx
+        ;mov cx, 9 ; cx = 9
+        ;sub bx, cx ; bx = bx - cx
 
         ; 20 / (a + b * c - 9)
-        mov ax, 20 ; ax = 20
-        cwd ; dx:ax = ax
-        idiv bx ; ax = dx:ax / bx
+        ;mov ax, 20 ; ax = 20
+        ;cwd ; dx:ax = ax
+        ;idiv bx ; ax = dx:ax / bx
 
         ; 20 / (a + b * c - 9)
-        movsx eax, ax ; eax = ax
-        mov ebx, [d] ; ebx = d
-        sub eax, ebx ; eax = eax - ebx
+        ;movsx eax, ax ; eax = ax
+        ;mov ebx, [d] ; ebx = d
+        ;sub eax, ebx ; eax = eax - ebx
 
     
         ; exit(0)
