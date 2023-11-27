@@ -45,8 +45,9 @@ segment code use32 class=code
             ; e = 12 * b
             mov ax, [b]
             mov bx, 12
-            mul bx     ; ax * bx = ax * 12
-            mov [e], ax ; e = ax
+            mul bx     ; dx:ax = ax * 12
+            mov [e+0], ax
+            mov [e + 2], dx
             jmp end_if ; jump to end_if
 
         if_false:
@@ -55,7 +56,8 @@ segment code use32 class=code
             mov bx, 11
             cwd ; convert ax (word) to dx:ax (double word)
             div bx     ; dx:ax / bx = ax remainder dx
-            mov [e], ax ; e = ax
+            movsx ebx, ax
+            mov [e], ebx
 
         end_if:
     
