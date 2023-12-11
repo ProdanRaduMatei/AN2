@@ -1,7 +1,8 @@
 <NotepadPlus>
     <Session activeView="0">
-        <mainView activeIndex="0">
-            <File firstVisibleLine="24" xOffset="0" scrollWidth="1170" startPos="1884" endPos="1884" selMode="0" lang="Assembly" encoding="-1" filename="F:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab4.asm" backupFilePath="" originalFileLastModifTimestamp="1701090888" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="7864439" mapWrapIndentMode="-1" mapIsWrap="no" />
+        <mainView activeIndex="1">
+            <File firstVisibleLine="6" xOffset="0" scrollWidth="2808" startPos="963" endPos="963" selMode="0" lang="Assembly" encoding="-1" filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5A8.asm" backupFilePath="" originalFileLastModifTimestamp="1702299502" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="1296387404" mapWrapIndentMode="-1" mapIsWrap="no" />
+            <File firstVisibleLine="16" xOffset="0" scrollWidth="2808" startPos="1194" endPos="1194" selMode="0" lang="Assembly" encoding="-1" filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5B5.asm" backupFilePath="" originalFileLastModifTimestamp="1702300522" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="3014698" mapWrapIndentMode="-1" mapIsWrap="no" />
         </mainView>
         <subView activeIndex="0" />
     </Session>
