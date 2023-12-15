@@ -6,8 +6,6 @@
         <Replace name="    " />
     </FindHistory>
     <History nbMaxFile="10" inSubMenu="no" customLength="-1">
-        <File filename="d:\DOCS\UBB\ASC\asm_tools\npp\Plugins\Config\asm_template_ro.asm" />
-        <File filename="D:\work\check\test.asm" />
         <File filename="D:\DOCS\UBB\ASC\intrebari_TODOs.txt" />
         <File filename="D:\asm_tools\npp\lab1bun.asm" />
         <File filename="D:\asm_tools\npp\Lab1.asm" />
@@ -16,6 +14,8 @@
         <File filename="F:\ASM_tools\asm_tools\npp\Lab3Ema.asm" />
         <File filename="F:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab3.asm" />
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5B5.txt" />
+        <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5B5.asm" />
+        <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5A8.asm" />
     </History>
     <GUIConfigs>
         <GUIConfig name="ToolBar" visible="yes">standard</GUIConfig>
@@ -63,7 +63,7 @@
             <ActiveTabs cont="0" activeTab="-1" />
             <ActiveTabs cont="1" activeTab="-1" />
             <ActiveTabs cont="2" activeTab="-1" />
-            <ActiveTabs cont="3" activeTab="0" />
+            <ActiveTabs cont="3" activeTab="-1" />
         </GUIConfig>
     </GUIConfigs>
     <ProjectPanels>
