@@ -1,0 +1,5 @@
+1|Heather Morris|The Tattooist of Auschwitz|250
+2|Andre Agassi|Open|300
+3|Aaron Courville, Ian Goodfellow, Yoshua Bengio|Deep Learning|700
+4|Author1|Book1|120
+5|Author2|Book2|200
