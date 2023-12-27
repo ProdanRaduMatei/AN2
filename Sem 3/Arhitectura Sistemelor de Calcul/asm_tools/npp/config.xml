@@ -6,7 +6,6 @@
         <Replace name="    " />
     </FindHistory>
     <History nbMaxFile="10" inSubMenu="no" customLength="-1">
-        <File filename="D:\DOCS\UBB\ASC\intrebari_TODOs.txt" />
         <File filename="D:\asm_tools\npp\lab1bun.asm" />
         <File filename="D:\asm_tools\npp\Lab1.asm" />
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab3.asm" />
@@ -16,6 +15,7 @@
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5B5.txt" />
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5B5.asm" />
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5A8.asm" />
+        <File filename="C:\Users\matei\Desktop\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab1.asm" />
     </History>
     <GUIConfigs>
         <GUIConfig name="ToolBar" visible="yes">standard</GUIConfig>
@@ -50,7 +50,7 @@
         <GUIConfig name="ScintillaGlobalSettings" enableMultiSelection="no" />
         <GUIConfig name="openSaveDir" value="0" defaultDirPath="" />
         <GUIConfig name="titleBar" short="no" />
-        <GUIConfig name="stylerTheme" path="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\stylers.xml" />
+        <GUIConfig name="stylerTheme" path="C:\Users\matei\Desktop\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\stylers.xml" />
         <GUIConfig name="wordCharList" useDefault="yes" charsAdded="" />
         <GUIConfig name="delimiterSelection" leftmostDelimiter="40" rightmostDelimiter="41" delimiterSelectionOnEntireDocument="no" />
         <GUIConfig name="multiInst" setting="0" />
@@ -63,7 +63,7 @@
             <ActiveTabs cont="0" activeTab="-1" />
             <ActiveTabs cont="1" activeTab="-1" />
             <ActiveTabs cont="2" activeTab="-1" />
-            <ActiveTabs cont="3" activeTab="-1" />
+            <ActiveTabs cont="3" activeTab="0" />
         </GUIConfig>
     </GUIConfigs>
     <ProjectPanels>
