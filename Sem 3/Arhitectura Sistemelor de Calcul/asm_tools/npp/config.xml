@@ -6,7 +6,6 @@
         <Replace name="    " />
     </FindHistory>
     <History nbMaxFile="10" inSubMenu="no" customLength="-1">
-        <File filename="D:\asm_tools\npp\lab1bun.asm" />
         <File filename="D:\asm_tools\npp\Lab1.asm" />
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab3.asm" />
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab2E1.asm" />
@@ -16,6 +15,7 @@
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5B5.asm" />
         <File filename="D:\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab5A8.asm" />
         <File filename="C:\Users\matei\Desktop\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\Lab1.asm" />
+        <File filename="C:\Users\matei\Desktop\AN2\Sem 3\Arhitectura Sistemelor de Calcul\asm_tools\npp\lab1bun.asm" />
     </History>
     <GUIConfigs>
         <GUIConfig name="ToolBar" visible="yes">standard</GUIConfig>
@@ -24,7 +24,7 @@
         <GUIConfig name="ScintillaViewsSplitter">vertical</GUIConfig>
         <GUIConfig name="UserDefineDlg" position="undocked">hide</GUIConfig>
         <GUIConfig name="TabSetting" replaceBySpace="yes" size="4" />
-        <GUIConfig name="AppPosition" x="0" y="342" width="1100" height="700" isMaximized="yes" />
+        <GUIConfig name="AppPosition" x="68" y="12" width="1100" height="700" isMaximized="yes" />
         <GUIConfig name="noUpdate" intervalDays="15" nextUpdateDate="20080426">no</GUIConfig>
         <GUIConfig name="Auto-detection">yes</GUIConfig>
         <GUIConfig name="CheckHistoryFiles">no</GUIConfig>
@@ -63,7 +63,7 @@
             <ActiveTabs cont="0" activeTab="-1" />
             <ActiveTabs cont="1" activeTab="-1" />
             <ActiveTabs cont="2" activeTab="-1" />
-            <ActiveTabs cont="3" activeTab="-1" />
+            <ActiveTabs cont="3" activeTab="0" />
         </GUIConfig>
     </GUIConfigs>
     <ProjectPanels>
