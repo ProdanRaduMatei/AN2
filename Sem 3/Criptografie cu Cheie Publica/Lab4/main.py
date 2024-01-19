@@ -1,77 +1,95 @@
-import random
-from sympy import isprime, mod_inverse
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
 
-# Define the alphabet
-alphabet = ' ' + ''.join(chr(i) for i in range(ord('a'), ord('z')+1))
+class SimpleEncryptor:
+    def __init__(self):
+        # Setting: The alphabet will have 27 characters.
+        self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ '
 
-# Function to convert string to int
-def str_to_int(s):
-    return sum(alphabet.index(c) * (len(alphabet) ** i) for i, c in enumerate(s))
+    def generate_key_pair(self):
+        # Generates a public key and a private key.
+        private_key = rsa.generate_private_key(
+            public_exponent=65537,
+            key_size=2048
+        )
+        public_key = private_key.public_key()
 
-# Function to convert int to string
-def int_to_str(n):
-    s = ''
-    while n > 0:
-        s = alphabet[n % len(alphabet)] + s
-        n //= len(alphabet)
-    return s
+        # Serialize keys to PEM format (Privacy Enhanced Mail)
+        private_pem = private_key.private_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption()
+        )
+        public_pem = public_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
+        )
 
-# Function to generate keys
-"""Key Generation:
-- Choose a large prime number p and a primitive root g modulo p.
-- Choose a random integer x from {1, ..., p-2}. This is the private key.
-- Compute y = g^x mod p. This is the public key.
-- The public key is (p, g, y), and the private key is x.
-"""
-def generate_keys():
-    # Choose a large prime p
-    p = random.choice([i for i in range(2**16, 2**17) if isprime(i)])
-    # Choose a primitive root g
-    g = random.choice([i for i in range(2, p) if pow(i, (p-1)//2, p) != 1])
-    # Choose a private key x
-    x = random.randint(1, p-2)
-    # Compute the public key y
-    y = pow(g, x, p)
-    return (p, g, y), x
+        return private_pem, public_pem
 
-# Function to encrypt a plaintext
-"""
-Encryption:
-- To encrypt a message m = plaintext (where m is an integer such that 1 <= m < p), choose a random integer k from {1, ..., p-2}.
-- Compute a = g^k mod p and b = m * h^k mod p.
-- The ciphertext is (a, b).
-"""
-def encrypt(plaintext, public_key):
-    p, g, y = public_key
-    plaintext_int = str_to_int(plaintext)
-    # Choose a random k
-    k = random.randint(1, p-2)
-    a = pow(g, k, p)
-    b = (plaintext_int * pow(y, k, p)) % p
-    return a, b
+    def encrypt(self, public_key_pem, plaintext):
+        # Load public key
+        public_key = serialization.load_pem_public_key(public_key_pem)
 
-# Function to decrypt a ciphertext
-"""
-Decryption:
+        # Encrypt the plaintext
+        ciphertext = public_key.encrypt(
+            plaintext.encode(),
+            padding.OAEP( # Optimal Asymmetric Encryption Padding
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
 
-- To decrypt a ciphertext (a, b), compute m = b * (a^x)^(-1) mod p.
-- The term (a^x)^(-1) mod p can be computed efficiently using the Extended Euclidean Algorithm for modular multiplicative inverse.
-"""
-def decrypt(ciphertext, private_key, public_key):
-    a, b = ciphertext
-    p, _, _ = public_key
-    x = private_key
-    plaintext_int = (b * mod_inverse(pow(a, x, p), p)) % p
-    return int_to_str(plaintext_int)
+        return ciphertext
 
-# Test the functions
-public_key, private_key = generate_keys()
-plaintext = 'hello world'
-ciphertext = encrypt(plaintext, public_key)
-decrypted = decrypt(ciphertext, private_key, public_key)
-print(f'Plaintext: {plaintext}')
-print(f'Ciphertext: {ciphertext}')
-print(f'Decrypted: {decrypted}')
+    def decrypt(self, private_key_pem, ciphertext):
+        # Load private key
+        private_key = serialization.load_pem_private_key(
+            private_key_pem,
+            password=None
+        )
+
+        # Decrypt the ciphertext
+        plaintext = private_key.decrypt(
+            ciphertext,
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+
+        return plaintext.decode()
+
+def main():
+    encryptor = SimpleEncryptor()
+
+    # Generate key pair
+    private_key_pem, public_key_pem = encryptor.generate_key_pair()
+
+    print("Public Key:")
+    print(public_key_pem.decode())
+
+    print("\nPrivate Key:")
+    print(private_key_pem.decode())
+
+    # Example plaintext
+    plaintext = "HELLO WORLD"
+
+    # Encrypt and decrypt
+    ciphertext = encryptor.encrypt(public_key_pem, plaintext)
+    decrypted_text = encryptor.decrypt(private_key_pem, ciphertext)
+
+    print("\nOriginal Text:", plaintext)
+    print("Encrypted Text:", ciphertext)
+    print("Decrypted Text:", decrypted_text)
+
+if __name__ == "__main__":
+    main()
+
 
 """
 The security of the ElGamal algorithm relies on the difficulty of the Discrete Logarithm Problem. If an attacker can solve this problem efficiently, they can compute the private key from the public key and decrypt any message encrypted with that public key. However, no efficient algorithm is known for solving the Discrete Logarithm Problem, making ElGamal a secure choice for public-key cryptography, assuming the keys are chosen properly and are of sufficient length.
