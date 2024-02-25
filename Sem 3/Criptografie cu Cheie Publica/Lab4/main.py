@@ -63,6 +63,12 @@ class SimpleEncryptor:
         )
 
         return plaintext.decode()
+    
+    def validate(self, plaintext):
+        # Check that the plaintext only contains valid characters
+        for char in plaintext:
+            if char not in self.alphabet:
+                raise Exception("Invalid character: " + char)
 
 def main():
     encryptor = SimpleEncryptor()
@@ -78,6 +84,7 @@ def main():
 
     # Example plaintext
     plaintext = "HELLO WORLD"
+    encryptor.validate(plaintext)
 
     # Encrypt and decrypt
     ciphertext = encryptor.encrypt(public_key_pem, plaintext)
