@@ -61,23 +61,23 @@
 % end
 % x;
 % y=sqrt(2*x.^2+3);
-x = 2:2:8;
-f = ([4,8,14,16]);
-k=1;
-for i=1:4
-    table(i, 1) = f(i);
-end
-for j=2:7
-    for i = 1:4-j+1
-        table(i,j) = (table(i+1, j-1) - table(i, j-1))/(x(i+k)-x(i));
-    end
-    k=k+1;
-end
-
-for i=1:4
-    fprintf('\n %.4f',x(i));
-    for j = 1:4-i+1
-        fprintf('\t %.4f', table(i,j));
-    end
-end
+% x = 2:2:8;
+% f = ([4,8,14,16]);
+% k=1;
+% for i=1:4
+%     table(i, 1) = f(i);
+% end
+% for j=2:7
+%     for i = 1:4-j+1
+%         table(i,j) = (table(i+1, j-1) - table(i, j-1))/(x(i+k)-x(i));
+%     end
+%     k=k+1;
+% end
+% 
+% for i=1:4
+%     fprintf('\n %.4f',x(i));
+%     for j = 1:4-i+1
+%         fprintf('\t %.4f', table(i,j));
+%     end
+% end
 
