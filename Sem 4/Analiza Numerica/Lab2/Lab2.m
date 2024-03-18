@@ -32,12 +32,100 @@
 % fL = Lagrange(x, x_nodes, f_nodes);
 % plot(x, fL, 'b');
 
-% 4.
-x = 1:1:14;
-f = (3 * tan(x .^ 2)) ./ (x .^ 2 + 2);
-plot(x, f, 'r--');
+% Problem 4.
+% % 1.
+% % Define the function f(n)
+% f = @(n) (3 * tan(n.^2)) ./ (n.^2 + 2);
+% 
+% % Create a vector of values for n within the interval [1, 14]
+% n_values = linspace(1, 14, 1000); % Adjust the number of points for smoother plot
+% 
+% % Compute the corresponding values of f(n) for each n
+% f_values = f(n_values);
+% 
+% % Plot the graph
+% plot(n_values, f_values, 'b', 'LineWidth', 2);
+% xlabel('n');
+% ylabel('f(n)');
+% title('Graph of f(n) = 3 * tan(n^2) / (n^2 + 2)');
+% grid on;
+% 
+% % 2.
+% % Define the function f(n)
+% f = @(n) (3 * tan(n.^2)) ./ (n.^2 + 2);
+% 
+% % Generate interpolation points
+% n_values = linspace(1, 14, 10); % Choose 10 points for interpolation
+% f_values = f(n_values);
+% 
+% % Compute coefficients of the Lagrange interpolation polynomial
+% p_coefficients = polyfit(n_values, f_values, length(n_values)-1);
+% 
+% % Define the Lagrange interpolation polynomial
+% lagrange_poly = @(x) polyval(p_coefficients, x);
+% 
+% % Evaluate the Lagrange interpolation polynomial on a fine grid
+% x_grid = linspace(1, 14, 1000);
+% lagrange_values = lagrange_poly(x_grid);
+% 
+% % Plot the original function f(n)
+% figure;
+% plot(x_grid, f(x_grid), 'b', 'LineWidth', 2);
+% hold on;
+% 
+% % Plot the Lagrange interpolation polynomial
+% plot(x_grid, lagrange_values, 'r--', 'LineWidth', 2);
+% 
+% % Plot interpolation points
+% scatter(n_values, f_values, 100, 'filled', 'MarkerFaceColor', 'g');
+% 
+% xlabel('n');
+% ylabel('f(n)');
+% title('Lagrange Interpolation Polynomial vs Original Function');
+% legend('Original Function f(n)', 'Lagrange Interpolation Polynomial', 'Interpolation Points');
+% grid on;
+% 
+% % 3.
+% % Evaluate the Lagrange interpolation polynomial at f(2.5) and f(8.75)
+% approximation_2_5 = lagrange_poly(2.5);
+% approximation_8_75 = lagrange_poly(8.75);
+% 
+% % Display the results
+% fprintf('Approximation of f(2.5): %.6f\n', approximation_2_5);
+% fprintf('Approximation of f(8.75): %.6f\n', approximation_8_75);
+
+% 5.
+
+% Define the function f(x)
+f = @(x) log(x + 2);
+
+% Generate interpolation points
+x_values = linspace(-1, 1, 13); % 13 equispaced points in [-1, 1]
+f_values = f(x_values);
+
+% Compute coefficients of the Lagrange interpolation polynomial
+p_coefficients = polyfit(x_values, f_values, length(x_values)-1);
+
+% Define the Lagrange interpolation polynomial
+lagrange_poly = @(x) polyval(p_coefficients, x);
+
+% Evaluate the Lagrange interpolation polynomial on a fine grid
+x_grid = linspace(-1, 1, 1000);
+lagrange_values = lagrange_poly(x_grid);
+
+% Plot the function f(x)
+figure;
+plot(x_grid, f(x_grid), 'b', 'LineWidth', 2);
 hold on;
-x_nodes = linspace(1, 14);
-f_nodes = (3 * tan(x_nodes .^ 2)) ./ (x_nodes .^ 2 + 2);
-fL = Lagrange(x, x_nodes, f_nodes);
-plot(x, fL, 'b');
+
+% Plot the Lagrange interpolation polynomial
+plot(x_grid, lagrange_values, 'r--', 'LineWidth', 2);
+
+% Plot interpolation points
+scatter(x_values, f_values, 100, 'filled', 'MarkerFaceColor', 'g');
+
+xlabel('x');
+ylabel('f(x)');
+title('Lagrange Interpolation Polynomial vs Original Function');
+legend('Original Function f(x)', 'Lagrange Interpolation Polynomial', 'Interpolation Points');
+grid on;
