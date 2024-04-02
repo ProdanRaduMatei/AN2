@@ -1,33 +1,43 @@
 #!/bin/bash
 
-# Check if the number of arguments is less than 2
+# Check if the number of arguments is not equal to 2
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <short_month_name> <day_number>"
+    echo "Usage: $0 <month_short_name> <day_number>"
     exit 1
 fi
 
-# Extract the short month name and day number from arguments
-short_month_name="$1"
-day_number="$2"
+# Check if the month short name is not 3 characters long
+if [ ${#1} -ne 3 ]; then
+    echo "Error: The month short name must be 3 characters long."
+    exit 1
+fi
 
-# Get the full month name based on the short month name
-case $short_month_name in
-    Jan) month_name="January" ;;
-    Feb) month_name="February" ;;
-    Mar) month_name="March" ;;
-    Apr) month_name="April" ;;
-    May) month_name="May" ;;
-    Jun) month_name="June" ;;
-    Jul) month_name="July" ;;
-    Aug) month_name="August" ;;
-    Sep) month_name="September" ;;
-    Oct) month_name="October" ;;
-    Nov) month_name="November" ;;
-    Dec) month_name="December" ;;
-    *) echo "Invalid short month name. Please use the format: Jan, Feb, ..., Dec."
-       exit 1
-       ;;
-esac
+# Check if the day number is not a number
+if ! [[ "$2" =~ ^[0-9]+$ ]]; then
+    echo "Error: The day number must be a number."
+    exit 1
+fi
 
-# Get the list of user accounts that were connected to the server on the specified date
-who | grep -E "$month_name\s+$day_number\b"
+# Extract the month short name and day number from the arguments
+month="$1"
+day="$2"
+
+# Get the log entries for all logins
+log_entries=$(last)
+
+# Filter out lines containing "reboot"
+filtered_entries=$(echo "$log_entries" | grep -v "reboot")
+
+# Filter log entries for the given month and day
+filtered_entries=$(echo "$filtered_entries" | grep " $month[[:space:]]\+$day")
+
+# Extract usernames from the filtered log entries
+usernames=$(echo "$filtered_entries" | awk '{print $1}')
+
+# Display the unique usernames logged in on the given day
+echo "User accounts logged in on $month $day:"
+if [ -n "$usernames" ]; then
+    echo "$usernames" | sort | uniq
+else
+    echo "No users logged in on $month $day."
+fi

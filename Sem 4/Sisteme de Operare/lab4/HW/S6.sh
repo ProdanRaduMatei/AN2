@@ -15,6 +15,20 @@ if ! [[ "$letter" =~ ^[a-z]$ ]]; then
     exit 1
 fi
 
+# Check if the lowercase letter is not a single character
+if [ ${#letter} -ne 1 ]; then
+    echo "Error: First argument must be a single lowercase letter."
+    exit 1
+fi
+
+# Check if the remaining arguments are files
+for file in "${@:2}"; do
+    if [ ! -f "$file" ]; then
+        echo "Error: '$file' is not a file."
+        exit 1
+    fi
+done
+
 # Shift to skip the first argument (the letter)
 shift
 
