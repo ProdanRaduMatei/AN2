@@ -41,6 +41,6 @@ for file in "$@"; do
     fi
 
     # Perform the replacement
-    sed -i "s/[^a-zA-Z0-9]/$letter/g" "$file"
+    sed -i "s/[^a-zA-Z0-9 ]/$letter/g" "$file"
     echo "Replaced special characters with '$letter' in file '$file'."
 done
