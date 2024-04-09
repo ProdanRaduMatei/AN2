@@ -76,10 +76,10 @@
 % s = [75, 77, 80, 74, 72]; % speed
 % 
 % % Compute the clamped cubic spline for distance
-% spline_distance = spline(t, [0, d, 0]);
+% spline_distance = spline(t, [75, d, 72]);
 % 
 % % Compute the clamped cubic spline for speed
-% spline_speed = spline(t, [0, s, 0]);
+% spline_speed = spline(t, s);
 % 
 % % Evaluate the splines at t = 10
 % t_predict = 10;
@@ -91,42 +91,42 @@
 % fprintf('Predicted speed of the car at t = 10: %.2f\n', s_predict);
 
 % 4.
-% Define the function f(x) = sin(2x)
-f = @(x) sin(2*x);
-
-% Define nodes between 0 and 2*pi
-n = 9;
-x_nodes = linspace(0, 2*pi, n);
-
-% Compute function values at each node
-y_nodes = f(x_nodes);
-
-% Define the interval for plotting
-x_interval = linspace(0, 2*pi, 1000);
-
-% Initialize the plot
-figure;
-plot(x_interval, f(x_interval), 'b-', 'LineWidth', 2); % Plot the function
-hold on;
-
-% Compute and plot the linear spline on each interval
-for i = 1:n-1
-    % Compute the slope of the linear spline
-    slope = (f(x_nodes(i+1)) - f(x_nodes(i))) / (x_nodes(i+1) - x_nodes(i));
-    
-    % Compute the linear spline function on the interval
-    spline_func = f(x_nodes(i)) + slope * (x_interval - x_nodes(i));
-    
-    % Plot the linear spline function
-    plot(x_interval, spline_func, 'r--');
-end
-
-% Plot nodes
-scatter(x_nodes, y_nodes, 100, 'ko', 'filled');
-
-xlabel('x');
-ylabel('y');
-title('Function and Linear Spline');
-legend('Function f(x)', 'Linear Spline', 'Nodes', 'Location', 'best');
-grid on;
-hold off;
+% % Define the function f(x) = sin(2x)
+% f = @(x) sin(2*x);
+% 
+% % Define nodes between 0 and 2*pi
+% n = 9;
+% x_nodes = linspace(0, 2*pi, n);
+% 
+% % Compute function values at each node
+% y_nodes = f(x_nodes);
+% 
+% % Define the interval for plotting
+% x_interval = linspace(0, 2*pi, 1000);
+% 
+% % Initialize the plot
+% figure;
+% plot(x_interval, f(x_interval), 'b-', 'LineWidth', 2); % Plot the function
+% hold on;
+% 
+% % Compute and plot the linear spline on each interval
+% for i = 1:n-1
+%     % Compute the slope of the linear spline
+%     slope = (f(x_nodes(i+1)) - f(x_nodes(i))) / (x_nodes(i+1) - x_nodes(i));
+% 
+%     % Compute the linear spline function on the interval
+%     spline_func = f(x_nodes(i)) + slope * (x_interval - x_nodes(i));
+% 
+%     % Plot the linear spline function
+%     plot(x_interval, spline_func, 'r--');
+% end
+% 
+% % Plot nodes
+% scatter(x_nodes, y_nodes, 100, 'ko', 'filled');
+% 
+% xlabel('x');
+% ylabel('y');
+% title('Function and Linear Spline');
+% legend('Function f(x)', 'Linear Spline', 'Nodes', 'Location', 'best');
+% grid on;
+% hold off;

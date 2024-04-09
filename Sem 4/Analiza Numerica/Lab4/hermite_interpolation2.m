@@ -1,5 +1,5 @@
 % Hermite interpolation function
-function [distance_estimate, speed_estimate] = hermite_interpolation(Time, Distance, Speed, t)
+function [distance_estimate, speed_estimate] = hermite_interpolation2(Time, Distance, Speed, t)
     n = length(Time);
 
     % Initialize matrices
