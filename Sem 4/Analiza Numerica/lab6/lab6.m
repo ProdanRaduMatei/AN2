@@ -1,37 +1,71 @@
 % 1.
+% Given data
+time = [9, 10, 11, 12, 13, 14, 15];
+temperature = [12, 10, 8, 11, 15, 17, 13];
+
+% Number of data points
+n = length(time);
+
+% Compute the coefficients A_k
+A = zeros(2, 1);
+for k = 1:n
+    A(1) = A(1) + temperature(k) * time(k);
+    A(2) = A(2) + temperature(k);
+end
+
+% Compute the nodes x_k
+x = [min(time), max(time)];
+
+% Compute the definite integral of f(x) from a to b
+integral_value = (max(time) - min(time)) * (A(1) + A(2)) / 2;
+
+% Compute the coefficients a and b
+a = A(1) / (max(time) - min(time));
+b = (A(2) * (max(time) + min(time)) - A(1)) / (2 * (max(time) - min(time)));
+
+% Display results
+fprintf('Linear least squares function: f(x) = %.4fx + %.4f\n', a, b);
+fprintf('Definite integral of f(x) from %.4f to %.4f: %.4f\n', x(1), x(2), integral_value);
+
+
 % % Given data points
-% time = [9, 10, 11, 12, 13, 14, 15]; % time
-% temperature = [12, 10, 8, 11, 15, 17, 13]; % temperature
+% time = [9, 10, 11, 12, 13, 14, 15]; % Time
+% temperature = [12, 10, 8, 11, 15, 17, 13]; % Temperature
 % 
-% % Perform linear least squares fitting
-% A = [time', ones(length(time), 1)];
-% coefficients = A \ temperature'; % Coefficients: [a; b]
+% % Formulate the system of equations for least squares method
+% n = length(time);
+% A = [ones(n, 1), time'];
+% b = temperature';
 % 
-% % Predict temperature at x = 16
-% x_predict = 16;
-% temperature_predict = coefficients(1) * x_predict + coefficients(2);
+% % Solve the system of equations
+% coefficients = A\b;
+% a = coefficients(2);
+% b = coefficients(1);
 % 
-% % Calculate the minimum value E(a, b)
-% error = sum((A * coefficients - temperature').^2);
+% % Predict the temperature at 16:00
+% temperature_16 = a * 16 + b;
+% 
+% % Compute the minimum value E(a, b)
+% E = sum((temperature - (a * time' + b)).^2);
 % 
 % % Display the results
-% fprintf('Linear least squares function: f(x) = %.4fx + %.4f\n', coefficients(1), coefficients(2));
-% fprintf('Predicted temperature at 16:00: %.2f\n', temperature_predict);
-% fprintf('Minimum value E(a, b): %.4f\n', error);
+% fprintf('Coefficients (a, b): %.4f, %.4f\n', a, b);
+% fprintf('Predicted temperature at 16:00: %.4f\n', temperature_16);
+% fprintf('Minimum value E(a, b): %.4f\n', E);
 % 
 % % Plot the points and the least squares function
 % figure;
 % scatter(time, temperature, 100, 'r', 'filled');
 % hold on;
-% x_interval = linspace(min(time), max(time), 100);
-% y_least_squares = coefficients(1) * x_interval + coefficients(2);
-% plot(x_interval, y_least_squares, 'b-', 'LineWidth', 2);
+% plot(time, a * time + b, 'b-', 'LineWidth', 2);
 % xlabel('Time');
 % ylabel('Temperature');
-% title('Linear Least Squares Fitting');
+% title('Least Squares Linear Regression');
 % legend('Data Points', 'Least Squares Function', 'Location', 'best');
 % grid on;
 % hold off;
+
+
 
 % 2.
 % % Given data points
@@ -89,33 +123,35 @@
 % disp(approximation_errors);
 
 % 3.
-% Prompt the user to select 10 random points
-disp('Please select 10 random points in the plot window.');
-points = ginput(10);
-
-% Extract x and y coordinates of selected points
-x_points = points(:, 1);
-y_points = points(:, 2);
-
-% Perform least squares fitting for a 2nd degree polynomial
-coefficients = polyfit(x_points, y_points, 2);
-
-% Generate x values for plotting
-x_values = linspace(0, 5, 100);
-
-% Evaluate the polynomial at x values
-y_values = polyval(coefficients, x_values);
-
-% Plot the selected points
-scatter(x_points, y_points, 100, 'r', 'filled');
-hold on;
-
-% Plot the least squares polynomial
-plot(x_values, y_values, 'b-', 'LineWidth', 2);
-
-xlabel('x');
-ylabel('y');
-title('Least Squares Polynomial Fitting');
-legend('Selected Points', 'Least Squares Polynomial', 'Location', 'best');
-grid on;
-hold off;
+% % Prompt the user to select 10 random points
+% disp('Please select 10 random points in the plot window.');
+% xlim([0,5]);
+% ylim([0,7]);
+% points = ginput(10);
+% 
+% % Extract x and y coordinates of selected points
+% x_points = points(:, 1);
+% y_points = points(:, 2);
+% 
+% % Perform least squares fitting for a 2nd degree polynomial
+% coefficients = polyfit(x_points, y_points, 2);
+% 
+% % Generate x values for plotting
+% x_values = linspace(0, 5, 100);
+% 
+% % Evaluate the polynomial at x values
+% y_values = polyval(coefficients, x_values);
+% 
+% % Plot the selected points
+% scatter(x_points, y_points, 100, 'r', 'filled');
+% hold on;
+% 
+% % Plot the least squares polynomial
+% plot(x_values, y_values, 'b-', 'LineWidth', 2);
+% 
+% xlabel('x');
+% ylabel('y');
+% title('Least Squares Polynomial Fitting');
+% legend('Selected Points', 'Least Squares Polynomial', 'Location', 'best');
+% grid on;
+% hold off;
