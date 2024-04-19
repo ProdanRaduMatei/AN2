@@ -1,14 +1,14 @@
 % 1.
 % % Define the function f(x)
 % f = @(x) 3 ./ (1 + 2 * x.^2);
-% 
+%
 % % Trapezoidal rule
 % a = 0; b = 1; % Limits of integration
 % n = 1000; % Number of subintervals
 % x = linspace(a, b, n+1);
 % h = (b - a) / n;
 % I_trapezium = h * (0.5 * (f(a) + f(b)) + sum(f(x(2:end-1))));
-% 
+%
 % % Plot the graph of the function and the trapezium
 % x_interval = linspace(a, b, 1000);
 % y_interval = f(x_interval);
@@ -24,10 +24,10 @@
 % legend('f(x)', 'Trapezium', 'Location', 'best');
 % grid on;
 % hold off;
-% 
+%
 % % Simpson's rule
 % I_simpson = (h / 3) * (f(a) + 4 * sum(f(x(2:2:end-1))) + 2 * sum(f(x(3:2:end-2))) + f(b));
-% 
+%
 % % Display the results
 % fprintf('Approximation of the integral using trapezium rule: %.6f\n', I_trapezium);
 % fprintf('Approximation of the integral using Simpson''s rule: %.6f\n', I_simpson);
@@ -35,18 +35,18 @@
 % 2.
 % % Define the function f(x, y)
 % f = @(x, y) log(2 * x + y);
-% 
+%
 % % Define the limits of integration
 % a = 1.2; b = 3; % limits for x
 % c = 1; d = 1.6; % limits for y
-% 
+%
 % % Trapezium formula for double integrals
 % I_trapezium = (((b - a) * (d - c)) / 16) * (...
 %     f(a, c) + f(a, d) + f(b, c) + f(b, d) + ...
 %     2 * f((a + b) / 2, c) + 2 * f((a + b) / 2, d) + ...
 %     2 * f(a, (c + d) / 2) + 2 * f(b, (c + d) / 2) + ...
 %     4 * f((a + b) / 2, (c + d) / 2));
-% 
+%
 % % Display the result
 % fprintf('Approximation of the double integral using trapezium formula: %.6f\n', I_trapezium);
 
@@ -54,16 +54,16 @@
 % % Define parameters
 % R = 110;
 % p = 75;
-% 
+%
 % % Define the function f(x)
 % f = @(x) sqrt(1 - (p/R) * sin(x));
-% 
+%
 % % Define limits of integration
 % a = 0; b = 2 * pi;
-% 
+%
 % % Repeated trapezium formula with two different values of n
 % n_values = [10, 100]; % Number of subintervals
-% 
+%
 % % Evaluate the integral for each value of n
 % for i = 1:length(n_values)
 %     n = n_values(i);
@@ -77,26 +77,26 @@
 % 4.
 % % Define the function f(x)
 % f = @(x) 1 ./ (5 + sin(25 * x));
-% 
+%
 % % Define limits of integration
 % a = 0; b = pi;
-% 
+%
 % % Repeated Simpson's formula with two different values of n
 % n_values = [12, 30]; % Number of subintervals
-% 
+%
 % % Evaluate the integral for each value of n
 % for i = 1:length(n_values)
 %     n = n_values(i);
 %     x = linspace(a, b, n+1);
 %     h = (b - a) / n;
-% 
+%
 %     % Compute the sum of odd terms and even terms
 %     sum_odd = sum(f(x(2:2:end-1)));
 %     sum_even = sum(f(x(3:2:end-2)));
-% 
+%
 %     % Apply Simpson's rule
 %     I_approx = (h / 3) * (f(a) + 4 * sum_odd + 2 * sum_even + f(b));
-% 
+%
 %     fprintf('Approximation of the integral with n = %d: %.6f\n', n, I_approx);
 % end
 
