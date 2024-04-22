@@ -1,4 +1,4 @@
-% 1.
+% % 1.
 % % Define the function f(x)
 % f = @(x) 3 ./ (1 + 2 * x.^2);
 
@@ -97,66 +97,66 @@
 % end
 
 % 5.
-% % Define the function f(t)
-% f = @(t) exp(-t.^2);
-
-% % Define limits of integration and x value
-% a = 0; x = 0.5;
-
-% % Repeated Simpson's formula with two different values of n
-% n_values = [4, 10]; % Number of subintervals
-
-% % Evaluate the integral for each value of n
-% for i = 1:length(n_values)
-%     n = n_values(i);
-%     t = linspace(a, x, n+1);
-%     h = (x - a) / n;
-
-%     % Compute the sum of odd terms and even terms
-%     sum_odd = sum(f(t(2:2:end-1)));
-%     sum_even = sum(f(t(3:2:end-2)));
-
-%     % Apply Simpson's rule
-%     E_approx = (h / 3) * (f(a) + 4 * sum_odd + 2 * sum_even + f(x));
-
-%     % Display the result
-%     fprintf('Approximation of E(0.5) with n = %d: %.12f\n', n, E_approx);
-
-%     % Estimate the accuracy of the result
-%     correct_value = 0.520499876;
-%     error = abs(E_approx - correct_value);
-%     fprintf('Estimated error: %.12f\n', error);
-% end
-
-% Define the function
+% Define the function f(t)
 f = @(t) exp(-t.^2);
 
-% Define the limits of integration
-a = 0;
-b = 0.5;
+% Define limits of integration and x value
+a = 0; x = 0.5;
 
-% Define the values of n
-n_values = [4, 10];
+% Repeated Simpson's formula with two different values of n
+n_values = [4, 10]; % Number of subintervals
 
-% Initialize the results vector
-E_values = zeros(size(n_values));
-
-% Calculate the integral for each value of n using the repeated Simpson's rule
+% Evaluate the integral for each value of n
 for i = 1:length(n_values)
     n = n_values(i);
-    h = (b - a) / n;
-    x = a:h:b;
-    y = f(x);
-    E_values(i) = (2/sqrt(pi)) * h/3 * (y(1) + 4*sum(y(2:2:end-1)) + 2*sum(y(3:2:end-2)) + y(end));
+    t = linspace(a, x, n+1);
+    h = (x - a) / n;
+    
+    % Compute the sum of odd terms and even terms
+    sum_odd = sum(f(t(2:2:end-1)));
+    sum_even = sum(f(t(3:2:end-2)));
+    
+    % Apply Simpson's rule
+    E_approx = (h / 3) * (f(a) + 4 * sum_odd + 2 * sum_even + f(x));
+    
+    % Display the result
+    fprintf('Approximation of E(0.5) with n = %d: %.12f\n', n, E_approx);
+    
+    % Estimate the accuracy of the result
+    correct_value = 0.520499876;
+    error = abs(E_approx - correct_value);
+    fprintf('Estimated error: %.12f\n', error);
 end
 
-% Define the correct value of E(0.5)
-E_correct = 0.520499876;
+% % Define the function
+% f = @(t) exp(-t.^2);
 
-% Calculate the absolute errors
-errors = abs(E_values - E_correct);
+% % Define the limits of integration
+% a = 0;
+% b = 0.5;
 
-% Display the results
-for i = 1:length(n_values)
-    disp(['n = ', num2str(n_values(i)), ', E = ', num2str(E_values(i)), ', error = ', num2str(errors(i))])
-end
+% % Define the values of n
+% n_values = [4, 10];
+
+% % Initialize the results vector
+% E_values = zeros(size(n_values));
+
+% % Calculate the integral for each value of n using the repeated Simpson's rule
+% for i = 1:length(n_values)
+%     n = n_values(i);
+%     h = (b - a) / n;
+%     x = a:h:b;
+%     y = f(x);
+%     E_values(i) = (2/sqrt(pi)) * h/3 * (y(1) + 4*sum(y(2:2:end-1)) + 2*sum(y(3:2:end-2)) + y(end));
+% end
+
+% % Define the correct value of E(0.5)
+% E_correct = 0.520499876;
+
+% % Calculate the absolute errors
+% errors = abs(E_values - E_correct);
+
+% % Display the results
+% for i = 1:length(n_values)
+%     disp(['n = ', num2str(n_values(i)), ', E = ', num2str(E_values(i)), ', error = ', num2str(errors(i))])
+% end

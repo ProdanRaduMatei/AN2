@@ -1,60 +1,60 @@
 % 1.
-% % Define the function and its second derivative
-% f = @(x) exp(-x.^2);
-% f2 = @(x) (4*x.^2 - 2).*exp(-x.^2);
+% Define the function and its second derivative
+f = @(x) exp(-x.^2);
+f2 = @(x) (4*x.^2 - 2).*exp(-x.^2);
 
-% % Define the limits of integration
-% a = 1;
-% b = 1.5;
+% Define the limits of integration
+a = 1;
+b = 1.5;
 
-% % Calculate the integral using the rectangle rule
-% E = (a + b) / 2;  % midpoint
-% R1 = ((b - a)^3 / 24) * f2(E);  % error term
-% I_rect = (b - a) * f(E) + R1;
+% Calculate the integral using the rectangle rule
+E = (a + b) / 2;  % midpoint
+R1 = ((b - a)^3 / 24) * f2(E);  % error term
+I_rect = (b - a) * f(E) + R1;
 
-% % Display the result
-% disp(['Rectangle rule: ', num2str(I_rect)])
+% Display the result
+disp(['Rectangle rule: ', num2str(I_rect)])
 
-% % Define the values of n
-% n_values = [150, 500];
+% Define the values of n
+n_values = [150, 500];
 
-% % Initialize the results vector
-% I_values = zeros(size(n_values));
+% Initialize the results vector
+I_values = zeros(size(n_values));
 
-% % Calculate the integral for each value of n using the repeated rectangle rule
-% for i = 1:length(n_values)
-%     n = n_values(i);
-%     h = (b - a) / n;
-%     x = a + h/2 : h : b;
-%     Rn = ((b - a)^3 / (24 * n^2)) * f2(E);  % error term
-%     I_values(i) = h * sum(f(x)) + Rn;
-% end
+% Calculate the integral for each value of n using the repeated rectangle rule
+for i = 1:length(n_values)
+    n = n_values(i);
+    h = (b - a) / n;
+    x = a + h/2 : h : b;
+    Rn = ((b - a)^3 / (24 * n^2)) * f2(E);  % error term
+    I_values(i) = h * sum(f(x)) + Rn;
+end
 
-% % Display the results
-% for i = 1:length(n_values)
-%     disp(['n = ', num2str(n_values(i)), ', I = ', num2str(I_values(i))])
-% end
+% Display the results
+for i = 1:length(n_values)
+    disp(['n = ', num2str(n_values(i)), ', I = ', num2str(I_values(i))])
+end
 
-% % Plot the function
-% x = linspace(a, b, 100);
-% y = f(x);
-% figure
-% plot(x, y, 'b')
-% hold on
+% Plot the function
+x = linspace(a, b, 100);
+y = f(x);
+figure
+plot(x, y, 'b')
+hold on
 
-% % Plot the rectangle
-% x_rect = [a a b b];
-% y_rect = [0 f(E) f(E) 0];
-% plot(x_rect, y_rect, 'r')
+% Plot the rectangle
+x_rect = [a a b b];
+y_rect = [0 f(E) f(E) 0];
+plot(x_rect, y_rect, 'r')
 
-% % Set the plot labels and title
-% xlabel('x')
-% ylabel('f(x)')
-% title('Approximation of the integral using the rectangle rule')
-% legend('f(x)', 'Rectangle', 'Location', 'Best')
+% Set the plot labels and title
+xlabel('x')
+ylabel('f(x)')
+title('Approximation of the integral using the rectangle rule')
+legend('f(x)', 'Rectangle', 'Location', 'Best')
 
-% % Hold off the plot
-% hold off
+% Hold off the plot
+hold off
 
 % 2.
 % % Define the function
@@ -120,71 +120,71 @@
 % disp(['Aitken''s form of the Romberg algorithm: ', num2str(A(i, i))])
 
 % 3.
-% Define the function
-f = @(x) 100./x.^2 .* sin(10./x);
+% % Define the function
+% f = @(x) 100./x.^2 .* sin(10./x);
 
-% Define the limits of integration
-a = 1;
-b = 3;
+% % Define the limits of integration
+% a = 1;
+% b = 3;
 
-% Define the precision
-epsilon = 10^-4;
+% % Define the precision
+% epsilon = 10^-4;
 
-% Plot the function
-x = linspace(a, b, 1000);
-y = f(x);
-figure
-plot(x, y)
-xlabel('x')
-ylabel('f(x)')
-title('Graph of the function')
+% % Plot the function
+% x = linspace(a, b, 1000);
+% y = f(x);
+% figure
+% plot(x, y)
+% xlabel('x')
+% ylabel('f(x)')
+% title('Graph of the function')
 
-% Define the Simpson's rule
-Simpson = @(a, b) (b - a) / 6 * (f(a) + 4*f((a + b) / 2) + f(b));
+% % Define the Simpson's rule
+% Simpson = @(a, b) (b - a) / 6 * (f(a) + 4*f((a + b) / 2) + f(b));
 
-% Calculate the integral using the adaptive quadrature algorithm
-I_adquad = adquad(a, b, epsilon, Simpson);
+% % Calculate the integral using the adaptive quadrature algorithm
+% I_adquad = adquad(a, b, epsilon, Simpson);
 
-% Display the result
-disp(['Adaptive quadrature: ', num2str(I_adquad)])
+% % Display the result
+% disp(['Adaptive quadrature: ', num2str(I_adquad)])
 
-% Define the values of n
-n_values = [50, 100];
+% % Define the values of n
+% n_values = [50, 100];
 
-% Initialize the results vector
-I_values = zeros(size(n_values));
+% % Initialize the results vector
+% I_values = zeros(size(n_values));
 
-% Calculate the integral for each value of n using the repeated Simpson's rule
-for i = 1:length(n_values)
-    n = n_values(i);
-    h = (b - a) / n;
-    x = a:h:b;
-    I_values(i) = h/3 * (f(a) + 4*sum(f(x(2:2:end-1))) + 2*sum(f(x(3:2:end-2))) + f(b));
-end
+% % Calculate the integral for each value of n using the repeated Simpson's rule
+% for i = 1:length(n_values)
+%     n = n_values(i);
+%     h = (b - a) / n;
+%     x = a:h:b;
+%     I_values(i) = h/3 * (f(a) + 4*sum(f(x(2:2:end-1))) + 2*sum(f(x(3:2:end-2))) + f(b));
+% end
 
-% Display the results
-for i = 1:length(n_values)
-    disp(['n = ', num2str(n_values(i)), ', I = ', num2str(I_values(i))])
-end
+% % Display the results
+% for i = 1:length(n_values)
+%     disp(['n = ', num2str(n_values(i)), ', I = ', num2str(I_values(i))])
+% end
 
-% Define the correct value of the integral
-I_correct = -1.4260247818;
+% % Define the correct value of the integral
+% I_correct = -1.4260247818;
 
-% Calculate the absolute errors
-errors = abs(I_values - I_correct);
+% % Calculate the absolute errors
+% errors = abs(I_values - I_correct);
 
-% Display the errors
-for i = 1:length(n_values)
-    disp(['n = ', num2str(n_values(i)), ', error = ', num2str(errors(i))])
-end
+% % Display the errors
+% for i = 1:length(n_values)
+%     disp(['n = ', num2str(n_values(i)), ', error = ', num2str(errors(i))])
+% end
 
-% Define the adaptive quadrature algorithm
-function I = adquad(a, b, er, Simpson)
-I1 = Simpson(a, b);
-I2 = Simpson(a, (a + b)/2) + Simpson((a + b) / 2, b);
-if abs(I1 - I2) < 15 * er
-    I = I2;
-else
-    I = adquad(a, (a + b) / 2, er / 2, Simpson) + adquad((a + b) / 2, b, er / 2, Simpson);
-end
-end
+% % Define the adaptive quadrature algorithm
+% function I = adquad(a, b, er, Simpson)
+% I1 = Simpson(a, b);
+% I2 = Simpson(a, (a + b)/2) + Simpson((a + b) / 2, b);
+% if abs(I1 - I2) < 15 * er
+%     I = I2;
+% else
+%     I = adquad(a, (a + b) / 2, er / 2, Simpson) + adquad((a + b) / 2, b, er / 2, Simpson);
+% end
+% end
