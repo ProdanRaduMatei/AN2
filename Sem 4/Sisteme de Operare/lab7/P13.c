@@ -4,37 +4,26 @@
 
 void print_line_without_words(char *line, int argc, char *argv[])
 {
-    int start = 0;
-    int len = strlen(line);
-    for (int i = 0; i <= len; i++)
+    char *word = strtok(line, " ");
+    int word_printed = 0;
+    while (word != NULL)
     {
-        if (line[i] == ' ' || line[i] == '\t' || line[i] == '\n' || line[i] == '\0')
+        int i;
+        for (i = 2; i < argc; i++)
         {
-            line[i] = '\0';
-            char *word = &line[start];
-            int j;
-            for (j = 2; j < argc; j++)
+            if (strcmp(word, argv[i]) == 0)
             {
-                if (strcmp(word, argv[j]) == 0)
-                {
-                    break;
-                }
+                break;
             }
-            if (j == argc)
-            {
-                printf("%s", word);
-                printf("%s", " ");
-                if (line[i] != '\0')
-                {
-                    printf("%c", line[i]);
-                }
-            }
-            else if (line[i] != '\0')
-            {
-                printf("%c", line[i]);
-            }
-            start = i + 1;
         }
+        if (i == argc)
+        {
+            if (word_printed)
+                printf(" ");
+            printf("%s", word);
+            word_printed = 1;
+        }
+        word = strtok(NULL, " ");
     }
     printf("\n");
 }
@@ -56,18 +45,12 @@ int main(int argc, char *argv[])
 
     char *line = NULL;
     size_t len = 0;
-    int read;
-
-    while ((read = (int)getline(&line, &len, file)) != -1)
-    {
+    while (getline(&line, &len, file) != -1)
         print_line_without_words(line, argc, argv);
-    }
 
     fclose(file);
     if (line)
-    {
         free(line);
-    }
 
     return 0;
 }
