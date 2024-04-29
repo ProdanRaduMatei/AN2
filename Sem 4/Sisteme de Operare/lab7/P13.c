@@ -10,12 +10,8 @@ void print_line_without_words(char *line, int argc, char *argv[])
     {
         int i;
         for (i = 2; i < argc; i++)
-        {
             if (strcmp(word, argv[i]) == 0)
-            {
                 break;
-            }
-        }
         if (i == argc)
         {
             if (word_printed)
@@ -25,7 +21,6 @@ void print_line_without_words(char *line, int argc, char *argv[])
         }
         word = strtok(NULL, " ");
     }
-    printf("\n");
 }
 
 int main(int argc, char *argv[])
